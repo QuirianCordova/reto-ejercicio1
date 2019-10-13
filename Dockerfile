@@ -8,10 +8,12 @@ RUN apt-get update \
  && apt-get clean \
  && rm -r /var/lib/apt/lists/*
 
+
 RUN echo "daemon off;" >> /etc/nginx/nginx.conf \
  && sed -i 's/worker_processes  1/worker_processes  auto/' /etc/nginx/nginx.conf
 
-ENV DOCKER_GEN_VERSION 0.7.4
+
+COPY network_internal.conf /etc/nginx/
 
 COPY . /app/
 WORKDIR /app/
